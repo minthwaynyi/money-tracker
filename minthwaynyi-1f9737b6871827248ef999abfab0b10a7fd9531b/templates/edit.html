@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Transaction
+{% endblock %}
+
+{% block main %}
+    <div class="container" id="form">
+        <h2>Edit Transaction</h2>
+        <form method="post" id="editTransactionForm">
+            <!-- Amount -->
+            <label for="amount">Amount:</label>
+            <input autocomplete="off" type="number" min="0" step="0.01" value="{{ transaction['amount'] }}" class="form-control mx-auto w-auto" id="amount" name="amount" required>
+            <br>
+
+            <!-- Type -->
+            <label for="type">Type:</label>
+            <select id="type" name="type" class="form-select form-control mx-auto w-auto">
+                <option value="earning" {% if transaction['type'] == 'earning' %}selected{% endif %}>Earning</option>
+                <option value="spending" {% if transaction['type'] == 'spending' %}selected{% endif %}>Spending</option>
+            </select>
+            <br><hr>
+
+            <!-- Reason -->
+            <label for="reason">Reason:</label>
+            <input type="text" value="{{ transaction['reason'] }}" class="form-control mx-auto w-auto" id="reason" name="reason" required>
+            <br><hr>
+
+            <!-- Date -->
+            <label for="date">Date:</label>
+            <input type="date" value="{{ transaction['date'] }}" class="form-control mx-auto w-auto" id="date" name="date" required>
+            <br><hr>
+
+            <!-- Tag -->
+            <label for="tag">(optional) Tag:</label>
+            <input type="text" value="{{ transaction['tag'] }}" class="form-control mx-auto w-auto" id="tag" name="tag" list="tagList">
+            <datalist id="tagList">
+                <!-- Reacorded tags go here -->
+                {% for tag in tags %}
+                    <option value="{{ tag['tag'] }}">
+                {% endfor %}
+            </datalist>
+            <br><hr>
+
+            <!-- Buttons -->
+            <button class="submit-btn btn-primary" type="submit">Save Changes</button>
+            <button class="reset-btn" type="reset">Reset</button>
+        </form>
+    </div>
+{% endblock %}

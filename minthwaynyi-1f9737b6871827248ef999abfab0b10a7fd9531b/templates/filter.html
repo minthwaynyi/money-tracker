@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Filter
+{% endblock %}
+
+{% block main %}
+    <h2>Filter Transactions</h2>
+    <div id="form">
+        <form method="post" id="filterTransactionForm">
+            <!-- Above or Below -->
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="limit" value="above" checked>
+                Above</label>
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="limit" value="below">
+                Below</label>
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="limit" value="none">
+                    None
+                </label>
+            </div>
+            <br>
+
+            <!-- Amount -->
+            <label for="amount">Amount:</label>
+            <input autocomplete="off" type="number" step="0.01" placeholder="Enter amount" class="form-control mx-auto w-auto" id="amount" name="amount">
+            <br>
+
+            <!-- Type -->
+            <label for="type">Type:</label>
+            <select id="type" name="type" class="form-select form-control mx-auto w-auto">
+                <option selected value="both">Both</option>
+                <option value="spending">Spending</option>
+                <option value="earning">Earning</option>
+            </select>
+            <br><hr>
+
+            <!-- Reason -->
+            <label for="reason">Reason:</label>
+            <input autocomplete="off" type="text" placeholder="Enter reason" class="form-control mx-auto w-auto" id="reason" name="reason">
+            <br><hr>
+
+            <!-- Date -->
+            <label for="date1">From:</label>
+            <input type="date" class="form-control mx-auto w-auto" id="date1" name="date1">
+            <label for="date2">To:</label>
+            <input type="date" class="form-control mx-auto w-auto" id="date2" name="date2">
+            <br><hr>
+
+            <!-- Tags -->
+            <label for="tag">Tag:</label>
+            <input autocomplete="off" type="text" placeholder="Enter tag" class="form-control mx-auto w-auto" id="tag" name="tag" list="tagList">
+            <datalist id="tagList">
+                <!-- Reacorded tags go here -->
+                {% for a_tag in tags %}
+                    <option value="{{ a_tag['tag'] }}">
+                {% endfor %}
+            </datalist>
+            <br><hr>
+
+            <!-- Buttons -->
+            <button class="submit-btn" type="submit">Filter</button>
+            <button class="reset-btn" type="reset">Reset</button>
+            <br>
+        </form>
+    </div>
+{% endblock %}

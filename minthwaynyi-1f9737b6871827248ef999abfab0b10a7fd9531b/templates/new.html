@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New
+{% endblock %}
+
+{% block main %}
+    <h2>New Transaction</h2>
+    <div id="form">
+        <form action="/new" method="post" id="transactionForm">
+            <!-- Amount -->
+            <label for="amount">Amount:</label>
+            <input autocomplete="off" type="number" min="0" step="0.01" placeholder="Enter amount" class="form-control mx-auto w-auto" id="amount" name="amount" required>
+            <br>
+
+            <!-- Type -->
+            <label for="type">Type:</label>
+            <select id="type" name="type" class="form-select form-control mx-auto w-auto">
+                <option value="earning">Earning</option>
+                <option selected value="spending">Spending</option>
+            </select>
+            <br><hr>
+
+            <!-- Reason -->
+            <label for="reason">Reason:</label>
+            <input autocomplete="off" type="text" placeholder="Enter reason" class="form-control mx-auto w-auto" id="reason" name="reason" required>
+            <br><hr>
+
+            <!-- Date -->
+            <label for="date">Date:</label>
+            <input type="date" class="form-control mx-auto w-auto" id="date" name="date" required>
+            <br><hr>
+
+            <!-- Tags -->
+            <label for="tag">(optional) Tag:</label>
+            <input autocomplete="off" type="text" placeholder="Enter tag" class="form-control mx-auto w-auto" id="tag" name="tag" list="tagList">
+            <datalist id="tagList">
+                <!-- Reacorded tags go here -->
+                {% for tag in tags %}
+                    <option value="{{ tag['tag'] }}">
+                {% endfor %}
+            </datalist>
+            <br><hr>
+
+            <!-- Buttons -->
+            <button class="submit-btn" type="submit">Add to Ledger</button>
+            <button class="reset-btn" type="reset">Reset</button>
+        </form>
+    </div>
+{% endblock %}

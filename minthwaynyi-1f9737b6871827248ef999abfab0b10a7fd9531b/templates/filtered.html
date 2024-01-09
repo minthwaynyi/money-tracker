@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Filtered
+{% endblock %}
+
+{% block main %}
+    <div>
+        <h3>Summary</h3>
+        <div class="scrollable">
+            <table class="table table-success table-striped">
+                <thead>
+                    <tr>
+                        <th>Total Earning</th>
+                        <th>Total Spending</th>
+                        <th>Net Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% if total_earning == 0 %}
+                            <td>${{ total_earning }}</td>
+                        {% else %}
+                            <td style="color:#006600">+${{ total_earning }}</td>
+                        {% endif %}
+                        {% if total_spending == 0 %}
+                            <td>${{ total_spending }}</td>
+                        {% else %}
+                            <td style="color:#990000">-${{ total_spending }}</td>
+                        {% endif %}
+                        {% if net_amount < 0 %}
+                            <td style="color:#990000">-${{ net_amount | abs}}</td>
+                        {% elif net_amount == 0 %}
+                            <td>${{ net_amount }}</td>
+                        {% else %}
+                            <td style="color:#006600">+${{ net_amount }}</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h2>Filtered Results</h2>
+        <div class="scrollable">
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Reason</th>
+                        <th>Date</th>
+                        <th>Tag</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            {% if transaction["type"] == "spending" %}
+                                <td style="color:#ff9999">-${{ transaction["amount"] }}</td>
+                            {% else %}
+                                <td style="color:#99ff99">+${{ transaction["amount"] }}</td>
+                            {% endif %}
+                            <td>{{ transaction["type"] }}</td>
+                            <td style="min-width: 15ch">{{ transaction["reason"] }}</td>
+                            <td style="min-width: 11ch">{{ transaction["date"] }}</td>
+                            <td>{{ transaction["tag"] }}</td>
+                            <td><a href="/edit/{{ transaction['id'] }}">Edit</a></td>
+                            <td><a href="/delete/{{ transaction['id'] }}">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
