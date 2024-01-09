@@ -1,7 +1,7 @@
 # Money Tracker
 ### Video Demo:  <https://youtu.be/EDRmwD2se-A>
 ## Description:
-What I created for the final project of CS50 is a web application called "Money Tracker." As the name suggests, it is designed to help people track the money they earn and spend.
+This is a web application called "Money Tracker." As the name suggests, it is designed to help people track the money they earn and spend.
 
 In terms of account registration, login/logout and signup procedures in this application are quite traditional and intuitive.
 
